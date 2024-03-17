@@ -1,8 +1,13 @@
-.Cards{
+.cardsDiv{
     display: flex;
+    flex-direction: row;
+}
+
+.Cards{
     gap: 10px;
 }
 
 .parentContainer{
     width: 100%;
+    padding-right: 10px;
 }
