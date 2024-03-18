@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './card.css'
 import { CircularProgressbar } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
-import { LayoutGroup } from 'framer-motion'
+import { motion, AnimateSharedLayout } from 'framer-motion'
 import Chart from 'react-apexcharts'
 import { IoMdClose } from "react-icons/io"
 import { DataChart } from '../../Data/Data'
@@ -13,13 +13,13 @@ const Card = (props) => {
 const [expanded, setExpanded] = useState(false)
 
   return (
-    <LayoutGroup>
+    <AnimateSharedLayout>
         {
              expanded?
                  <ExpandedCard param={props} setExpanded={()=>setExpanded(false)}/>:
                  <CompactCard param = {props} setExpanded={()=>setExpanded(true)} />
         }
-    </LayoutGroup>
+    </AnimateSharedLayout>
   )
 }
 
@@ -27,12 +27,14 @@ function CompactCard ({param, setExpanded}){
 
     const Png = param.png;
         return(
-            <div className="CompactCard"
+            <motion.div className="CompactCard"
             style={{
                 background: param.color.backGround,
                 boxShadow: param.color.boxShadow
             }}
             onClick={setExpanded}
+            animateChildren={true}
+            layoutId='expandableCard'
             >
                 <div className="radialBar">
                     <CircularProgressbar
@@ -46,20 +48,20 @@ function CompactCard ({param, setExpanded}){
                     <span>${param.value}</span>
                     <span>Últimas 24h horas.</span>
                 </div>
-            </div>
+            </motion.div>
         )
     }
 
 function ExpandedCard({param, setExpanded}){
     return(
-        <div className="ExpandedCard"
+        <motion.div className="ExpandedCard"
         style={{
-        background: param.color.backGround,
+            background: param.color.backGround,
         boxShadow: param.color.boxShadow,
     }}
-    layout
+        layoutId='expandableCard'
         >
-            <div>
+            <div style={{alignSelf: 'flex-end', cursor: 'pointer', color: 'white'}}>
             <IoMdClose onClick={setExpanded} />
             </div>
             <span>
@@ -69,7 +71,7 @@ function ExpandedCard({param, setExpanded}){
                 <Chart series={param.series} type='area' options={DataChart.options}/>
             </div>
             <span>Últimas 24 horas</span>
-        </div>
+        </motion.div>
     )
 }
 
