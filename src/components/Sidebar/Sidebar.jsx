@@ -1,15 +1,37 @@
 import React, { useState } from 'react'
 import Logo from '../../imgs/logo.png'
+import { motion } from 'framer-motion'
 import { SidebarData } from '../../Data/Data'
 import { PiSignOutLight } from "react-icons/pi"
+import { HiBars3 } from "react-icons/hi2";
 import './Sidebar.css'
 
 
 const Sidebar = () => {
 const [selected, setSelected] = useState(0)
+const [expanded, setExpanded] = useState(true)
+
+const sidebarVariants = {
+    true: {
+        left: '0'
+    },
+    false: {
+        left: '-60%'
+    }
+}
 
   return (
-    <div className="Sidebar">
+    <>
+        <div className='bars' 
+        style={expanded? {left: '60%'}:{left: '5%'}}
+        onClick={()=>setExpanded(!expanded)}
+        >
+            <HiBars3 />
+        </div>
+    <motion.div className="Sidebar"
+    variants={sidebarVariants}
+    animate={window.innerWidth<=768?`${expanded}`:''}
+    >
         {/* {logo} */}
         <div className="logo">
             <img src={Logo} alt="" />
@@ -37,7 +59,8 @@ const [selected, setSelected] = useState(0)
                 <PiSignOutLight />
             </div>
         </div>
-    </div>
+    </motion.div>
+    </>
   )
 }
 
