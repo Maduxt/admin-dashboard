@@ -7,6 +7,10 @@ import {
     PiMoneyLight
  } from "react-icons/pi"
 
+ import img1 from '../imgs/img1.png'
+ import img2 from '../imgs/img2.png'
+ import img3 from '../imgs/img3.png'
+
  import { BiMoneyWithdraw } from "react-icons/bi"
 
  export const SidebarData = [
@@ -131,3 +135,25 @@ import {
         },
     },
 }
+
+
+export const UpdateData = [
+    {
+        img: img1,
+        name: 'Jackie Chan',
+        noti: ' pediu 2 notebooks Lenovo',
+        time: '40 min atrás',
+    },
+    {
+        img: img2,
+        name: 'Philip Gal',
+        noti: ' pediu 1 carregador tipo C',
+        time: '2 horas atrás',
+    },
+    {
+        img: img3,
+        name: 'Elain',
+        noti: ' pediu 1 pin de acesso',
+        time: '15 min atrás',
+    },
+]
